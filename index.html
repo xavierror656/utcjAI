@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IA Aplicada a la Electromovilidad — UTCJ</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #0D1B2A;
+      color: #E8F4FD;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    header { text-align: center; margin-bottom: 3rem; }
+    header h1 { color: #00D4FF; font-size: 1.8rem; margin-bottom: 0.5rem; }
+    header p { color: #64748B; font-size: 0.95rem; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.25rem;
+      max-width: 900px;
+      width: 100%;
+    }
+    .card {
+      background: #1B4F72;
+      border-radius: 10px;
+      padding: 1.5rem;
+      text-decoration: none;
+      color: #E8F4FD;
+      transition: transform 0.15s, box-shadow 0.15s;
+      border: 1px solid #00D4FF20;
+    }
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px #00D4FF20;
+      border-color: #00D4FF60;
+    }
+    .card .num {
+      font-size: 0.7rem;
+      color: #00D4FF;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+    .card h2 { font-size: 1rem; margin-bottom: 0.5rem; color: #00D4FF; }
+    .card p { font-size: 0.82rem; color: #94A3B8; }
+    .coming-soon {
+      opacity: 0.45;
+      pointer-events: none;
+      cursor: default;
+    }
+    .badge {
+      display: inline-block;
+      font-size: 0.65rem;
+      background: #00D4FF;
+      color: #0D1B2A;
+      border-radius: 4px;
+      padding: 1px 8px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-bottom: 0.6rem;
+    }
+    .badge.soon { background: #1B4F72; color: #64748B; border: 1px solid #334155; }
+    footer { margin-top: 3rem; color: #334155; font-size: 0.75rem; text-align: center; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Inteligencia Artificial Aplicada a la Electromovilidad</h1>
+    <p>Universidad Tecnológica de Ciudad Juárez · 16 horas · 8 bloques</p>
+  </header>
+
+  <div class="grid">
+    <a class="card" href="bloque-01/">
+      <div class="badge">DISPONIBLE</div>
+      <div class="num">Bloque 01</div>
+      <h2>Fundamentos de Machine Learning</h2>
+      <p>Supervisado, no supervisado, refuerzo · Métricas · Overfitting</p>
+    </a>
+    <a class="card" href="bloque-02/">
+      <div class="badge">DISPONIBLE</div>
+      <div class="num">Bloque 02</div>
+      <h2>Percepción del Entorno y Computer Vision</h2>
+      <p>Cámaras, LiDAR, detección de objetos · YOLO · Sensores</p>
+    </a>
+    <div class="card coming-soon">
+      <div class="badge soon">PRÓXIMAMENTE</div>
+      <div class="num">Bloque 03</div>
+      <h2>Arquitectura de Sistemas y Deployment</h2>
+      <p>Edge AI · GPU · Contenedores · CI/CD</p>
+    </div>
+    <div class="card coming-soon">
+      <div class="badge soon">PRÓXIMAMENTE</div>
+      <div class="num">Bloque 04</div>
+      <h2>Gestión Inteligente de Energía y Baterías</h2>
+      <p>BMS · SOC · SOH · Carga predictiva</p>
+    </div>
+    <div class="card coming-soon">
+      <div class="badge soon">PRÓXIMAMENTE</div>
+      <div class="num">Bloque 05</div>
+      <h2>Infraestructura de Carga Inteligente</h2>
+      <p>Smart grid · V2G · Optimización de red</p>
+    </div>
+    <div class="card coming-soon">
+      <div class="badge soon">PRÓXIMAMENTE</div>
+      <div class="num">Bloque 06</div>
+      <h2>Logística y Optimización de Rutas</h2>
+      <p>VRP · Flota EV · Algoritmos de routing</p>
+    </div>
+    <div class="card coming-soon">
+      <div class="badge soon">PRÓXIMAMENTE</div>
+      <div class="num">Bloque 07</div>
+      <h2>Tráfico Inteligente y Sistemas Multiagente</h2>
+      <p>SUMO · Semáforos adaptativos · V2X</p>
+    </div>
+    <div class="card coming-soon">
+      <div class="badge soon">PRÓXIMAMENTE</div>
+      <div class="num">Bloque 08</div>
+      <h2>Integración Integral con CARLA</h2>
+      <p>Simulación autónoma · Sensor fusion · ROS2</p>
+    </div>
+  </div>
+
+  <footer>UTCJ · Ciudad Juárez, Chihuahua · 2025</footer>
+</body>
+</html>

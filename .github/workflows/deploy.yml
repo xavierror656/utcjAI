@@ -32,8 +32,8 @@ jobs:
           npm run build:01
           npm run build:02
 
-      - name: Create index
-        run: cp dist/index.html dist/index.html 2>/dev/null || true
+      - name: Copy index to dist
+        run: cp index.html dist/index.html
 
       - uses: actions/upload-pages-artifact@v3
         with:
