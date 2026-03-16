@@ -25,10 +25,11 @@ jobs:
           node-version: 20
           cache: npm
 
-      - run: npm ci
+      - run: npm install
 
       - name: Build bloques
         run: |
+          mkdir -p dist
           npm run build:01
           npm run build:02
 
