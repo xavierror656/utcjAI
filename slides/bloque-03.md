@@ -248,34 +248,57 @@ class: dark-slide
 
 # Arquitectura de IA en un EV Moderno
 
-<div class="space-y-3 mt-4 text-sm">
-  <div v-click class="rounded p-3 text-center" style="background:#1a2a3a;">
-    <div class="text-accent font-bold mb-1">NUBE / SERVIDOR</div>
-    <div class="flex justify-center gap-4 text-xs muted">
-      <span>Entrenamiento de modelos</span>
-      <span>Actualizaciones OTA</span>
-      <span>Telemetria</span>
+<div class="grid grid-cols-3 gap-3 mt-3">
+  <div class="col-span-2">
+    <div class="slide-scroll">
+
+```mermaid
+%%{init: {'theme': 'dark', 'themeVariables': {'primaryColor': '#1B4F72', 'primaryTextColor': '#E8F4FD', 'primaryBorderColor': '#00D4FF', 'lineColor': '#00D4FF', 'clusterBkg': '#0D1B2A'}}}%%
+flowchart TD
+    subgraph CLOUD["☁️ Capa Cloud"]
+        OTA["Actualizaciones OTA"] & TRAIN["Entrenamiento\nde modelos"] & TELEM["Telemetría\nflota"]
+    end
+    subgraph CONN["📡 Conectividad"]
+        G5["5G / WiFi"] & V2X["V2X\nVehicle to Everything"]
+    end
+    subgraph VEHICLE["🚗 A bordo del vehículo"]
+        INFO["Chip Infotainment\nMapas · Voz · Apps · Display"]
+        AUTO["★ Chip Conducción Autónoma\nPercepción · Planificación · Control"]
+        subgraph HW["🔌 Hardware"]
+            CAM["Cámaras"] & LIDAR["LiDAR"] & RADAR["Radar"] & BMS["BMS"] & CAN["CAN Bus"]
+        end
+    end
+    CLOUD <--> CONN
+    CONN <--> INFO
+    CONN <--> AUTO
+    HW --> AUTO
+    style AUTO fill:#1B4F72,color:#00D4FF,stroke:#00D4FF,stroke-width:2px
+    style CLOUD fill:#0D1B2A,stroke:#243B55
+    style CONN fill:#0D1B2A,stroke:#243B55
+    style VEHICLE fill:#0D1B2A,stroke:#1B4F72
+    style HW fill:#0a1520,stroke:#1B4F72
+```
+
+  </div>
+  </div>
+
+  <div class="space-y-2 text-xs">
+    <div v-click class="card-ev p-2">
+      <div class="text-accent font-bold mb-1">☁️ Cloud</div>
+      <div class="muted">Entrena modelos con datos de toda la flota. OTA actualiza el vehículo sin taller.</div>
     </div>
-  </div>
-  <div class="text-center text-accent text-xs">↕</div>
-  <div v-click class="rounded p-3 text-center" style="background:#1a2a3a;">
-    <div class="text-accent font-bold mb-1">CONECTIVIDAD</div>
-    <div class="flex justify-center gap-4 text-xs muted"><span>5G / WiFi</span><span>V2X (Vehicle to Everything)</span></div>
-  </div>
-  <div class="text-center text-accent text-xs">↕</div>
-  <div v-click class="rounded p-3 text-center" style="background:#1a2a3a;">
-    <div class="text-accent font-bold mb-1">CHIP INFOTAINMENT</div>
-    <div class="flex justify-center gap-4 text-xs muted"><span>Mapas</span><span>Voz</span><span>Apps</span><span>Display</span></div>
-  </div>
-  <div class="text-center text-accent text-xs">↕</div>
-  <div v-click class="rounded p-3 text-center border" style="border-color:#00D4FF; background:#00D4FF15;">
-    <div class="text-accent font-bold mb-1">CHIP CONDUCCION AUTONOMA ★</div>
-    <div class="flex justify-center gap-4 text-xs muted"><span>Percepcion</span><span>Planificacion</span><span>Control</span></div>
-  </div>
-  <div class="text-center text-accent text-xs">↕</div>
-  <div v-click class="rounded p-3 text-center" style="background:#1a2a3a;">
-    <div class="text-accent font-bold mb-1">HARDWARE / SENSORES</div>
-    <div class="flex justify-center gap-4 text-xs muted"><span>Camaras</span><span>LiDAR</span><span>Radar</span><span>BMS</span><span>CAN Bus</span></div>
+    <div v-click class="card-ev p-2">
+      <div class="text-accent font-bold mb-1">📡 V2X</div>
+      <div class="muted">Coordina con semáforos, otros EVs y infraestructura de Ciudad Juárez.</div>
+    </div>
+    <div v-click class="card-ev p-2">
+      <div class="font-bold mb-1" style="color:#10B981;">★ Chip autónomo</div>
+      <div class="muted">Core del sistema. Procesa sensores en <span class="text-accent">&lt;30 ms</span>. Ejemplo: Tesla HW3 = 144 TOPS.</div>
+    </div>
+    <div v-click class="card-ev p-2">
+      <div class="font-bold mb-1" style="color:#F59E0B;">🔌 Sensores</div>
+      <div class="muted">CAN Bus conecta todo. BMS reporta estado de batería al chip cada 10 ms.</div>
+    </div>
   </div>
 </div>
 
