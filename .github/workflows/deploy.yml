@@ -27,18 +27,25 @@ jobs:
 
       - run: npm install
 
-      - name: Build bloques
+      - name: Build all bloques
         run: |
           npm run build:01
           npm run build:02
+          npm run build:03
+          npm run build:04
+          npm run build:05
+          npm run build:06
+          npm run build:07
+          npm run build:08
 
       - name: Prepare dist
         run: |
-          # Slidev puede escribir relativo al entry file (slides/) o al CWD
-          if [ -d "slides/dist" ] && [ ! -d "dist" ]; then
-            mv slides/dist dist
-          fi
+          mkdir -p dist
+          # Slidev escribe relativo al directorio del archivo .md → slides/dist/
+          cp -r slides/dist/. dist/
+          # Index principal y .nojekyll para que GitHub Pages sirva assets con _
           cp index.html dist/index.html
+          touch dist/.nojekyll
 
       - uses: actions/upload-pages-artifact@v3
         with:

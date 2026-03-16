@@ -131,7 +131,7 @@ layout: default
 
 | # | Nombre | Slides |
 |---|--------|--------|
-| 01 | Fundamentos de Machine Learning | 10 |
+| 01 | Fundamentos de Machine Learning | 30 |
 | 02 | Percepción del Entorno y Computer Vision | 10 |
 | 03 | Arquitectura de Sistemas y Deployment | 10 |
 | 04 | Gestión Inteligente de Energía y Baterías | 10 |

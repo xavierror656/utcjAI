@@ -12,6 +12,8 @@ mdc: true
 zoom: 0.85
 fonts:
   sans: 'Segoe UI'
+mermaid:
+  theme: dark
 ---
 
 # Bloque 01
@@ -102,6 +104,38 @@ class: dark-slide
 </div>
 
 ---
+layout: default
+class: dark-slide
+---
+
+# Mapa Conceptual — IA, ML y Deep Learning
+
+<div class="mt-2">
+
+```mermaid
+%%{init: {'theme': 'dark', 'themeVariables': {'primaryColor': '#1B4F72', 'primaryTextColor': '#E8F4FD', 'primaryBorderColor': '#00D4FF', 'lineColor': '#00D4FF', 'secondaryColor': '#0D1B2A', 'tertiaryColor': '#243B55'}}}%%
+flowchart TD
+    IA["🤖 Inteligencia Artificial\n(1950s →)"] --> SE["Sistemas Expertos\nReglas manuales"]
+    IA --> ML["🧠 Machine Learning\nAprende de datos"]
+    ML --> CML["ML Clasico\nRandom Forest · SVM · KNN"]
+    ML --> DL["🔬 Deep Learning\nRedes Neuronales Profundas"]
+    DL --> CNN["CNN\nVision por computadora"]
+    DL --> RNN["RNN / LSTM\nSeries temporales BMS"]
+    DL --> TR["Transformers\nLLMs — ChatGPT · Claude"]
+
+    style IA fill:#1B4F72,color:#E8F4FD,stroke:#00D4FF
+    style ML fill:#1B4F72,color:#00D4FF,stroke:#00D4FF
+    style DL fill:#1a3a2a,color:#10B981,stroke:#10B981
+    style CML fill:#0D1B2A,color:#E8F4FD,stroke:#1B4F72
+    style SE fill:#0D1B2A,color:#64748B,stroke:#64748B
+    style CNN fill:#0D1B2A,color:#10B981,stroke:#10B981
+    style RNN fill:#0D1B2A,color:#10B981,stroke:#10B981
+    style TR fill:#2a1500,color:#F59E0B,stroke:#F59E0B
+```
+
+</div>
+
+---
 layout: image-right
 image: /img/b01-neural-network.jpg
 class: dark-slide
@@ -117,40 +151,33 @@ class: dark-slide
 </div>
 
 <div class="slide-scroll">
-<div class="space-y-3">
-  <div v-click class="rounded-lg p-3 border-l-4 flex items-start gap-3" style="background:#1a1020; border-color:#ef4444;">
+<div class="space-y-2">
+  <div v-click class="rounded-lg p-2 border-l-4 flex items-start gap-3" style="background:#1a1020; border-color:#ef4444;">
     <mdi-timer class="text-2xl flex-shrink-0" />
     <div>
       <div class="font-bold text-sm mb-1" style="color:#ef4444;">Latencia inaceptable</div>
-      <div class="text-xs text-gray-300">BMS necesita decisiones en <span class="font-bold text-accent">milisegundos</span>. LLM tarda 1–10 seg. Inaceptable en frenado regenerativo.</div>
-      <div class="flex items-center gap-1 mt-2">
-        <div class="text-xs muted">LLM:</div>
-        <div class="h-2 rounded" style="width:80px; background:#ef4444;"></div>
-        <div class="text-xs muted ml-2">ML:</div>
-        <div class="h-2 rounded" style="width:4px; background:#10B981;"></div>
-        <div class="text-xs ml-1" style="color:#10B981;">~1ms</div>
-      </div>
+      <div class="text-xs text-gray-300">BMS necesita decisiones en <span class="font-bold text-accent">milisegundos</span>. LLM tarda 1–10 seg — inaceptable en frenado regenerativo.</div>
     </div>
   </div>
-  <div v-click class="rounded-lg p-3 border-l-4 flex items-start gap-3" style="background:#1a1500; border-color:#F59E0B;">
+  <div v-click class="rounded-lg p-2 border-l-4 flex items-start gap-3" style="background:#1a1500; border-color:#F59E0B;">
     <mdi-chart-bar class="text-2xl flex-shrink-0" />
     <div>
       <div class="font-bold text-sm mb-1" style="color:#F59E0B;">Datos numéricos, no texto</div>
-      <div class="text-xs text-gray-300">EVs generan voltaje, corriente, temp, GPS. Los LLMs están hechos para <span style="color:#F59E0B;" class="font-bold">lenguaje</span>, no para series temporales de sensores.</div>
+      <div class="text-xs text-gray-300">EVs generan voltaje, corriente, temp, GPS. LLMs están hechos para <span style="color:#F59E0B;" class="font-bold">lenguaje</span>, no para series temporales de sensores.</div>
     </div>
   </div>
-  <div v-click class="rounded-lg p-3 border-l-4 flex items-start gap-3" style="background:#1a0a2a; border-color:#8B5CF6;">
+  <div v-click class="rounded-lg p-2 border-l-4 flex items-start gap-3" style="background:#1a0a2a; border-color:#8B5CF6;">
     <mdi-laptop class="text-2xl flex-shrink-0" />
     <div>
       <div class="font-bold text-sm mb-1" style="color:#8B5CF6;">Costo computacional enorme</div>
       <div class="text-xs text-gray-300">GPT-4: miles de GPUs A100. ECU embebida: recursos limitados. ML clásico corre en <span style="color:#8B5CF6;" class="font-bold">STM32</span> dentro del vehículo.</div>
     </div>
   </div>
-  <div v-click class="rounded-lg p-3 border-l-4 flex items-start gap-3" style="background:#0a1a10; border-color:#10B981;">
+  <div v-click class="rounded-lg p-2 border-l-4 flex items-start gap-3" style="background:#0a1a10; border-color:#10B981;">
     <mdi-magnify class="text-2xl flex-shrink-0" />
     <div>
       <div class="font-bold text-sm mb-1" style="color:#10B981;">Explicabilidad obligatoria</div>
-      <div class="text-xs text-gray-300">Norma <span style="color:#10B981;" class="font-bold">ISO 26262</span> exige modelos auditables. LLMs son cajas negras — no puedes certificarlos para seguridad automotriz.</div>
+      <div class="text-xs text-gray-300">Norma <span style="color:#10B981;" class="font-bold">ISO 26262</span> exige modelos auditables. LLMs son cajas negras — no certificables para seguridad automotriz.</div>
     </div>
   </div>
 </div>
@@ -163,7 +190,7 @@ class: dark-slide
 
 # Problemas Técnicos de los LLMs
 
-<img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1280&q=20" class="absolute inset-0 w-full h-full object-cover opacity-5 -z-1" />
+<img src="/img/b01-matrix.jpg" class="absolute inset-0 w-full h-full object-cover opacity-5 -z-1" />
 
 <div class="slide-scroll">
 <div class="grid grid-cols-3 gap-3 mt-3">
@@ -334,16 +361,16 @@ class: dark-slide
 </div>
 
 <div class="slide-scroll">
-<div class="space-y-3">
-  <div v-click class="rounded-lg p-3 flex items-start gap-3" style="background:#1a2a1a; border:1px solid #10B98130;">
+<div class="space-y-2">
+  <div v-click class="rounded-lg p-2 flex items-start gap-3" style="background:#1a2a1a; border:1px solid #10B98130;">
     <mdi-chat class="text-2xl flex-shrink-0" />
     <div>
       <div class="font-bold text-sm mb-1" style="color:#10B981;">Asistente de flota para operadores</div>
-      <div class="text-xs text-gray-300">"¿Cuál unidad tiene mayor riesgo hoy?" → LLM interpreta → consulta el dashboard ML → responde en lenguaje natural.</div>
+      <div class="text-xs text-gray-300">"¿Cuál unidad tiene mayor riesgo hoy?" → LLM interpreta → consulta dashboard ML → responde en lenguaje natural.</div>
       <div class="inline-block mt-1 px-2 py-0.5 rounded text-xs font-bold" style="background:#10B98120; color:#10B981;">Interfaz NLP → ML</div>
     </div>
   </div>
-  <div v-click class="rounded-lg p-3 flex items-start gap-3" style="background:#1a2010; border:1px solid #00D4FF30;">
+  <div v-click class="rounded-lg p-2 flex items-start gap-3" style="background:#1a2010; border:1px solid #00D4FF30;">
     <mdi-clipboard-list class="text-2xl flex-shrink-0" />
     <div>
       <div class="font-bold text-sm mb-1 text-accent">Generación de reportes técnicos</div>
@@ -351,19 +378,19 @@ class: dark-slide
       <div class="inline-block mt-1 px-2 py-0.5 rounded text-xs font-bold" style="background:#00D4FF15; color:#00D4FF;">Post-procesamiento</div>
     </div>
   </div>
-  <div v-click class="rounded-lg p-3 flex items-start gap-3" style="background:#20182a; border:1px solid #8B5CF630;">
+  <div v-click class="rounded-lg p-2 flex items-start gap-3" style="background:#20182a; border:1px solid #8B5CF630;">
     <mdi-school class="text-2xl flex-shrink-0" />
     <div>
       <div class="font-bold text-sm mb-1" style="color:#8B5CF6;">Capacitación de conductores</div>
-      <div class="text-xs text-gray-300">Chatbot que aconseja sobre carga nocturna CFE, manejo eficiente en calor extremo (45°C verano Juárez).</div>
+      <div class="text-xs text-gray-300">Chatbot sobre carga nocturna CFE y manejo eficiente en calor extremo (45°C verano Juárez).</div>
       <div class="inline-block mt-1 px-2 py-0.5 rounded text-xs font-bold" style="background:#8B5CF620; color:#8B5CF6;">Educación</div>
     </div>
   </div>
-  <div v-click class="rounded-lg p-3 flex items-start gap-3" style="background:#1a1a2a; border:1px solid #F59E0B30;">
+  <div v-click class="rounded-lg p-2 flex items-start gap-3" style="background:#1a1a2a; border:1px solid #F59E0B30;">
     <mdi-wrench class="text-2xl flex-shrink-0" />
     <div>
       <div class="font-bold text-sm mb-1" style="color:#F59E0B;">RAG sobre manuales técnicos</div>
-      <div class="text-xs text-gray-300">Consulta instantánea de manuales BYD, Nissan Leaf, VW ID.4 sin buscar manualmente 500+ páginas.</div>
+      <div class="text-xs text-gray-300">Consulta instantánea de manuales BYD, Nissan Leaf, VW ID.4 sin revisar 500+ páginas manualmente.</div>
       <div class="inline-block mt-1 px-2 py-0.5 rounded text-xs font-bold" style="background:#F59E0B20; color:#F59E0B;">Recuperación info</div>
     </div>
   </div>
@@ -406,7 +433,40 @@ class: dark-slide
 
 <div v-click class="mt-6 text-center text-sm muted">Veamos cada uno en detalle →</div>
 
-<img src="https://images.unsplash.com/photo-1677756119517-756a188d2d94?auto=format&fit=crop&w=1280&q=40" class="absolute inset-0 w-full h-full object-cover opacity-5 -z-1" />
+<img src="/img/b01-neural-network.jpg" class="absolute inset-0 w-full h-full object-cover opacity-5 -z-1" />
+
+---
+layout: default
+class: dark-slide
+---
+
+# ¿Qué paradigma ML usar en tu proyecto EV?
+
+<div class="mt-2">
+
+```mermaid
+%%{init: {'theme': 'dark', 'themeVariables': {'primaryColor': '#1B4F72', 'primaryTextColor': '#E8F4FD', 'primaryBorderColor': '#00D4FF', 'lineColor': '#00D4FF'}}}%%
+flowchart TD
+    D[("📊 Datos de Sensores EV\nBMS · GPS · CAN Bus")] --> Q{"¿Tienes etiquetas\nen tus datos?"}
+    Q -->|"Sí — falla/normal\nautonomia_km"| SUP["✅ Supervisado\nClasificacion · Regresion"]
+    Q -->|"No — solo\nobservaciones"| UNSUP["✅ No Supervisado\nClustering · Anomalias"]
+    Q -->|"Interaccion con\nel entorno"| RL["✅ Por Refuerzo\nOptimizacion de politicas"]
+
+    SUP --> S1["Random Forest\nRegresion Lineal · KNN"]
+    UNSUP --> U1["K-Means · DBSCAN\nIsolation Forest · PCA"]
+    RL --> R1["Q-Learning · DQN\nPPO · Multi-Agent RL"]
+
+    style D fill:#1B4F72,color:#E8F4FD,stroke:#00D4FF
+    style Q fill:#243B55,color:#00D4FF,stroke:#00D4FF
+    style SUP fill:#1B4F72,color:#00D4FF,stroke:#00D4FF
+    style UNSUP fill:#1a3a2a,color:#10B981,stroke:#10B981
+    style RL fill:#2a2010,color:#F59E0B,stroke:#F59E0B
+    style S1 fill:#0D1B2A,color:#E8F4FD,stroke:#1B4F72
+    style U1 fill:#0D1B2A,color:#E8F4FD,stroke:#1B4F72
+    style R1 fill:#0D1B2A,color:#E8F4FD,stroke:#1B4F72
+```
+
+</div>
 
 ---
 layout: default
@@ -416,9 +476,9 @@ class: dark-slide
 # <mdi-school class="inline" /> Aprendizaje Supervisado
 
 <div class="slide-scroll">
-<div class="grid grid-cols-2 gap-6 mt-4">
+<div class="grid grid-cols-2 gap-4 mt-2">
   <div>
-    <div class="text-accent font-bold mb-3">¿Como funciona?</div>
+    <div class="text-accent font-bold mb-2">¿Como funciona?</div>
     <div class="text-sm mb-4">
       El modelo recibe <span class="text-accent font-bold">datos de entrada (X)</span> junto con la
       <span class="text-accent font-bold">respuesta correcta (Y)</span>. Aprende la relacion entre ambos
@@ -434,7 +494,7 @@ class: dark-slide
     </div>
   </div>
   <div>
-    <div class="font-bold mb-3" style="color: #10B981;"><mdi-calculator class="inline" /> Algoritmos Principales</div>
+    <div class="font-bold mb-2" style="color: #10B981;"><mdi-calculator class="inline" /> Algoritmos Principales</div>
     <div class="space-y-2">
       <div v-click class="card-ev p-3 text-sm">
         <span class="text-accent font-bold">Regresion Lineal</span> — Predice valores continuos<br>
@@ -466,16 +526,44 @@ layout: default
 class: dark-slide
 ---
 
+# Pipeline de Entrenamiento Supervisado
+
+<div class="mt-3">
+
+```mermaid
+%%{init: {'theme': 'dark', 'themeVariables': {'primaryColor': '#1B4F72', 'primaryTextColor': '#E8F4FD', 'primaryBorderColor': '#00D4FF', 'lineColor': '#00D4FF'}}}%%
+flowchart LR
+    A[("🔌 Datos EV\nBMS · GPS · CAN")] --> B["Preprocesamiento\nlimpieza · normalización"]
+    B --> C["Split Dataset\n70% Train | 15% Val | 15% Test"]
+    C --> D["Entrenamiento\nRandom Forest · KNN"]
+    D --> E{"Evaluacion\nAccuracy · RMSE"}
+    E -->|"No satisfactorio\najustar hiperparametros"| B
+    E -->|"✓ Listo"| F["Deploy en ECU\ndel vehiculo EV"]
+
+    style A fill:#1B4F72,color:#E8F4FD,stroke:#00D4FF
+    style B fill:#243B55,color:#E8F4FD,stroke:#1B4F72
+    style C fill:#1B4F72,color:#00D4FF,stroke:#00D4FF
+    style D fill:#243B55,color:#E8F4FD,stroke:#1B4F72
+    style E fill:#2a1500,color:#F59E0B,stroke:#F59E0B
+    style F fill:#1a3a2a,color:#10B981,stroke:#10B981
+```
+
+</div>
+
+---
+layout: default
+class: dark-slide
+---
+
 # <mdi-school class="inline" /> Supervisado — Ejemplos en Electromovilidad
 
-<div class="slide-scroll">
 <div class="space-y-2 mt-2">
-  <div v-click class="card-ev p-3">
+  <div v-click class="card-ev p-2">
     <div class="flex items-start gap-2">
       <mdi-battery class="text-xl" />
       <div>
         <div class="text-accent font-bold mb-1">Prediccion de fallas en celdas — Foxconn Juárez</div>
-        <div class="text-xs mb-1">Un modelo Random Forest analiza voltaje, corriente y temperatura de cada celda en tiempo real para predecir si fallará en las proximas 24 horas.</div>
+        <div class="text-xs mb-1">Random Forest analiza voltaje, corriente y temperatura para predecir si una celda fallará en las proximas 24 horas.</div>
         <div class="flex gap-2">
           <span class="badge-ev text-xs">Clasificacion</span>
           <span class="inline-block px-2 py-0.5 rounded text-xs" style="background:#1B4F72;">Random Forest</span>
@@ -484,12 +572,12 @@ class: dark-slide
       </div>
     </div>
   </div>
-  <div v-click class="card-ev p-3">
+  <div v-click class="card-ev p-2">
     <div class="flex items-start gap-2">
       <mdi-car-electric class="text-xl" />
       <div>
         <div class="text-accent font-bold mb-1">Estimacion de autonomia en desierto de Chihuahua</div>
-        <div class="text-xs mb-1">Regresion lineal multivariable que toma temperatura exterior (hasta 45°C en verano), uso de AC, velocidad y pendiente para estimar km restantes con precision.</div>
+        <div class="text-xs mb-1">Regresion lineal con temperatura exterior (45°C verano), AC, velocidad y pendiente para estimar km restantes.</div>
         <div class="flex gap-2">
           <span class="inline-block px-2 py-0.5 rounded text-xs" style="background:#10B981; color:#0D1B2A;">Regresion</span>
           <span class="inline-block px-2 py-0.5 rounded text-xs" style="background:#1B4F72;">Regresion Lineal</span>
@@ -498,12 +586,12 @@ class: dark-slide
       </div>
     </div>
   </div>
-  <div v-click class="card-ev p-3">
+  <div v-click class="card-ev p-2">
     <div class="flex items-start gap-2">
       <mdi-lightning-bolt class="text-xl" />
       <div>
         <div class="text-accent font-bold mb-1">Clasificacion de estilo de manejo — Blvd. Zaragoza</div>
-        <div class="text-xs mb-1">Un arbol de decision analiza aceleracion, frecuencia de frenado (topes) y velocidad promedio para clasificar al conductor como suave, normal o agresivo.</div>
+        <div class="text-xs mb-1">Arbol de decision analiza aceleracion, frenado y velocidad promedio para clasificar conductor: suave / normal / agresivo.</div>
         <div class="flex gap-2">
           <span class="badge-ev text-xs">Clasificacion</span>
           <span class="inline-block px-2 py-0.5 rounded text-xs" style="background:#1B4F72;">Arbol de Decision</span>
@@ -512,12 +600,12 @@ class: dark-slide
       </div>
     </div>
   </div>
-  <div v-click class="card-ev p-3">
+  <div v-click class="card-ev p-2">
     <div class="flex items-start gap-2">
       <mdi-power-plug class="text-xl" />
       <div>
         <div class="text-accent font-bold mb-1">Prediccion de SoC al llegar al cruce fronterizo</div>
-        <div class="text-xs mb-1">KNN estima el State of Charge necesario para esperar en fila del Puente Zaragoza (1-3 hrs con AC) + tramo freeway en El Paso.</div>
+        <div class="text-xs mb-1">KNN estima el SoC para la espera en Puente Zaragoza (1-3 hrs con AC) más el tramo freeway en El Paso.</div>
         <div class="flex gap-2">
           <span class="inline-block px-2 py-0.5 rounded text-xs" style="background:#10B981; color:#0D1B2A;">Regresion</span>
           <span class="inline-block px-2 py-0.5 rounded text-xs" style="background:#1B4F72;">KNN</span>
@@ -527,7 +615,6 @@ class: dark-slide
     </div>
   </div>
 </div>
-</div>
 
 ---
 layout: default
@@ -536,12 +623,12 @@ class: dark-slide
 
 # <mdi-magnify class="inline" /> Aprendizaje No Supervisado
 
-<img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1280&q=30" class="absolute inset-0 w-full h-full object-cover opacity-5 -z-1" />
+<img src="/img/b01-data-chart.jpg" class="absolute inset-0 w-full h-full object-cover opacity-5 -z-1" />
 
 <div class="slide-scroll">
-<div class="grid grid-cols-2 gap-6 mt-4">
+<div class="grid grid-cols-2 gap-4 mt-2">
   <div>
-    <div style="color: #10B981;" class="font-bold mb-3">¿Como funciona?</div>
+    <div style="color: #10B981;" class="font-bold mb-2">¿Como funciona?</div>
     <div class="text-sm mb-4">
       El modelo recibe <span style="color:#10B981;" class="font-bold">solo datos de entrada (X)</span>,
       <span style="color:#ef4444;" class="font-bold">sin respuestas correctas</span>.
@@ -557,7 +644,7 @@ class: dark-slide
     </div>
   </div>
   <div>
-    <div class="font-bold mb-3" style="color: #10B981;"><mdi-calculator class="inline" /> Algoritmos Principales</div>
+    <div class="font-bold mb-2" style="color: #10B981;"><mdi-calculator class="inline" /> Algoritmos Principales</div>
     <div class="space-y-2">
       <div v-click class="rounded-lg p-3 text-sm" style="background:#1a3a2a;">
         <span style="color:#10B981;" class="font-bold">K-Means</span> — Agrupa datos en K clusters<br>
@@ -591,14 +678,13 @@ class: dark-slide
 
 # <mdi-magnify class="inline" /> No Supervisado — Ejemplos en Electromovilidad
 
-<div class="slide-scroll">
 <div class="space-y-2 mt-2">
-  <div v-click class="rounded-lg p-3" style="background:#1a3a2a; border: 1px solid #10B98140;">
+  <div v-click class="rounded-lg p-2" style="background:#1a3a2a; border: 1px solid #10B98140;">
     <div class="flex items-start gap-2">
       <mdi-account-group class="text-xl" />
       <div>
         <div class="font-bold mb-1" style="color:#10B981;">Segmentacion de conductores — Corredor IMMEX</div>
-        <div class="text-xs mb-1">K-Means agrupa a 200 conductores de flota maquiladora en 4 perfiles: economico, normal, agresivo y variable. Permite adaptar alertas y capacitacion por grupo.</div>
+        <div class="text-xs mb-1">K-Means agrupa 200 conductores en 4 perfiles (economico, normal, agresivo, variable) para adaptar alertas por grupo.</div>
         <div class="flex gap-2">
           <span class="inline-block px-2 py-0.5 rounded text-xs" style="background:#10B981; color:#0D1B2A;">Clustering</span>
           <span class="inline-block px-2 py-0.5 rounded text-xs" style="background:#1B4F72;">K-Means</span>
@@ -607,12 +693,12 @@ class: dark-slide
       </div>
     </div>
   </div>
-  <div v-click class="rounded-lg p-3" style="background:#1a3a2a; border: 1px solid #10B98140;">
+  <div v-click class="rounded-lg p-2" style="background:#1a3a2a; border: 1px solid #10B98140;">
     <div class="flex items-start gap-2">
       <mdi-alarm-light class="text-xl" />
       <div>
         <div class="font-bold mb-1" style="color:#10B981;">Deteccion de anomalias en carga nocturna</div>
-        <div class="text-xs mb-1">Isolation Forest monitorea los patrones de carga de la flota durante la noche. Si una unidad carga un 40% mas lento que lo habitual, se genera una alerta de posible degradacion.</div>
+        <div class="text-xs mb-1">Isolation Forest detecta si una unidad carga 40% mas lento que lo habitual y genera alerta de degradacion.</div>
         <div class="flex gap-2">
           <span class="inline-block px-2 py-0.5 rounded text-xs" style="background:#10B981; color:#0D1B2A;">Anomalias</span>
           <span class="inline-block px-2 py-0.5 rounded text-xs" style="background:#1B4F72;">Isolation Forest</span>
@@ -621,12 +707,12 @@ class: dark-slide
       </div>
     </div>
   </div>
-  <div v-click class="rounded-lg p-3" style="background:#1a3a2a; border: 1px solid #10B98140;">
+  <div v-click class="rounded-lg p-2" style="background:#1a3a2a; border: 1px solid #10B98140;">
     <div class="flex items-start gap-2">
       <mdi-map class="text-xl" />
       <div>
         <div class="font-bold mb-1" style="color:#10B981;">Segmentacion de rutas Juárez–El Paso</div>
-        <div class="text-xs mb-1">DBSCAN agrupa rutas similares por consumo energetico, distancia y tiempo. Descubre que las rutas por Puente Libre vs Puente Zaragoza tienen perfiles completamente distintos.</div>
+        <div class="text-xs mb-1">DBSCAN descubre perfiles distintos entre rutas: Puente Libre vs Puente Zaragoza tienen consumo, distancia y tiempo completamente diferentes.</div>
         <div class="flex gap-2">
           <span class="inline-block px-2 py-0.5 rounded text-xs" style="background:#10B981; color:#0D1B2A;">Clustering</span>
           <span class="inline-block px-2 py-0.5 rounded text-xs" style="background:#1B4F72;">DBSCAN</span>
@@ -635,12 +721,12 @@ class: dark-slide
       </div>
     </div>
   </div>
-  <div v-click class="rounded-lg p-3" style="background:#1a3a2a; border: 1px solid #10B98140;">
+  <div v-click class="rounded-lg p-2" style="background:#1a3a2a; border: 1px solid #10B98140;">
     <div class="flex items-start gap-2">
       <mdi-trending-down class="text-xl" />
       <div>
         <div class="font-bold mb-1" style="color:#10B981;">Reduccion de datos CAN Bus — Continental Juárez</div>
-        <div class="text-xs mb-1">PCA reduce 50+ señales del CAN Bus a las 5-7 componentes principales que explican el 95% de la varianza. Simplifica el monitoreo en tiempo real.</div>
+        <div class="text-xs mb-1">PCA reduce 50+ señales del CAN Bus a 5-7 componentes que explican el 95% de la varianza, simplificando el monitoreo.</div>
         <div class="flex gap-2">
           <span class="inline-block px-2 py-0.5 rounded text-xs" style="background:#10B981; color:#0D1B2A;">Reduccion</span>
           <span class="inline-block px-2 py-0.5 rounded text-xs" style="background:#1B4F72;">PCA</span>
@@ -650,7 +736,6 @@ class: dark-slide
     </div>
   </div>
 </div>
-</div>
 
 ---
 layout: default
@@ -659,12 +744,12 @@ class: dark-slide
 
 # <mdi-gamepad-variant class="inline" /> Aprendizaje por Refuerzo
 
-<img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1280&q=30" class="absolute inset-0 w-full h-full object-cover opacity-5 -z-1" />
+<img src="/img/b01-ai-brain.jpg" class="absolute inset-0 w-full h-full object-cover opacity-5 -z-1" />
 
 <div class="slide-scroll">
-<div class="grid grid-cols-2 gap-6 mt-4">
+<div class="grid grid-cols-2 gap-4 mt-2">
   <div>
-    <div style="color: #F59E0B;" class="font-bold mb-3">¿Como funciona?</div>
+    <div style="color: #F59E0B;" class="font-bold mb-2">¿Como funciona?</div>
     <div class="text-sm mb-4">
       Un <span style="color:#F59E0B;" class="font-bold">agente</span> interactua con un
       <span style="color:#F59E0B;" class="font-bold">entorno</span>, toma
@@ -698,7 +783,7 @@ class: dark-slide
     </div>
   </div>
   <div>
-    <div class="font-bold mb-3" style="color: #F59E0B;"><mdi-calculator class="inline" /> Algoritmos Principales</div>
+    <div class="font-bold mb-2" style="color: #F59E0B;"><mdi-calculator class="inline" /> Algoritmos Principales</div>
     <div class="space-y-2">
       <div v-click class="rounded-lg p-3 text-sm" style="background:#2a2010;">
         <span style="color:#F59E0B;" class="font-bold">Q-Learning</span> — Tabla de valores por estado-accion<br>
@@ -730,16 +815,40 @@ layout: default
 class: dark-slide
 ---
 
+# Ciclo del Agente de Aprendizaje por Refuerzo
+
+<div class="mt-4">
+
+```mermaid
+%%{init: {'theme': 'dark', 'themeVariables': {'primaryColor': '#1B4F72', 'primaryTextColor': '#E8F4FD', 'primaryBorderColor': '#00D4FF', 'lineColor': '#F59E0B'}}}%%
+flowchart LR
+    AGT(["🤖 Agente RL\nModelo de politica"]) -->|"⚡ Accion\ncargar · descargar\noptimizar semaforo"| ENV(["🌍 Entorno\nRed CFE · Trafico\nBMS del vehiculo"])
+    ENV -->|"📡 Nuevo Estado\nprecio kWh · SoC\ncongestion vial"| AGT
+    ENV -->|"🏆 Recompensa\n+ahorro · -multa\n-tiempo espera"| AGT
+    AGT --- POL[("📋 Politica\nEstrategia\naprendida")]
+
+    style AGT fill:#2a2010,color:#F59E0B,stroke:#F59E0B
+    style ENV fill:#1B4F72,color:#E8F4FD,stroke:#00D4FF
+    style POL fill:#0D1B2A,color:#F59E0B,stroke:#F59E0B
+```
+
+<div class="mt-4 text-xs text-center muted">El agente mejora su política iterativamente — con cada episodio aprende a maximizar la recompensa acumulada</div>
+</div>
+
+---
+layout: default
+class: dark-slide
+---
+
 # <mdi-gamepad-variant class="inline" /> Por Refuerzo — Ejemplos en Electromovilidad
 
-<div class="slide-scroll">
 <div class="space-y-2 mt-2">
-  <div v-click class="rounded-lg p-3" style="background:#2a2010; border: 1px solid #F59E0B40;">
+  <div v-click class="rounded-lg p-2" style="background:#2a2010; border: 1px solid #F59E0B40;">
     <div class="flex items-start gap-2">
       <mdi-traffic-light class="text-xl" />
       <div>
         <div class="font-bold mb-1" style="color:#F59E0B;">Optimizacion de semáforos — Tecnologico y Zaragoza</div>
-        <div class="text-xs mb-1">Un agente DQN controla los ciclos de los semáforos. Recompensa: reducir tiempo de espera promedio. Penalizacion: congestion o alto consumo de energia en EVs frenando/arrancando.</div>
+        <div class="text-xs mb-1">DQN controla ciclos de semáforos. Recompensa: reducir espera. Penalizacion: congestion o alto consumo de EVs frenando/arrancando.</div>
         <div class="flex gap-2">
           <span class="inline-block px-2 py-0.5 rounded text-xs" style="background:#F59E0B; color:#0D1B2A;">Optimizacion</span>
           <span class="inline-block px-2 py-0.5 rounded text-xs" style="background:#1B4F72;">DQN</span>
@@ -748,12 +857,12 @@ class: dark-slide
       </div>
     </div>
   </div>
-  <div v-click class="rounded-lg p-3" style="background:#2a2010; border: 1px solid #F59E0B40;">
+  <div v-click class="rounded-lg p-2" style="background:#2a2010; border: 1px solid #F59E0B40;">
     <div class="flex items-start gap-2">
       <mdi-lightning-bolt class="text-xl" />
       <div>
         <div class="font-bold mb-1" style="color:#F59E0B;">Gestion de carga V2G — Horario pico CFE</div>
-        <div class="text-xs mb-1">PPO decide cuando cargar y cuando devolver energia a la red. Recompensa: ahorrar en tarifa electrica aprovechando precio bajo nocturno y vendiendo en hora pico.</div>
+        <div class="text-xs mb-1">PPO decide cuándo cargar y cuándo devolver energía. Aprovecha tarifa baja nocturna y vende en hora pico para maximizar ahorro.</div>
         <div class="flex gap-2">
           <span class="inline-block px-2 py-0.5 rounded text-xs" style="background:#F59E0B; color:#0D1B2A;">Energia</span>
           <span class="inline-block px-2 py-0.5 rounded text-xs" style="background:#1B4F72;">PPO</span>
@@ -762,12 +871,12 @@ class: dark-slide
       </div>
     </div>
   </div>
-  <div v-click class="rounded-lg p-3" style="background:#2a2010; border: 1px solid #F59E0B40;">
+  <div v-click class="rounded-lg p-2" style="background:#2a2010; border: 1px solid #F59E0B40;">
     <div class="flex items-start gap-2">
       <mdi-taxi class="text-xl" />
       <div>
         <div class="font-bold mb-1" style="color:#F59E0B;">Ruteo de taxis electricos — Ciudad Juárez</div>
-        <div class="text-xs mb-1">Q-Learning encuentra rutas que minimizan consumo evitando topes, subidas y cruces con mucho frenado. Recompensa: mas km con menos kWh.</div>
+        <div class="text-xs mb-1">Q-Learning evita topes, subidas y cruces con frenado intenso. Recompensa: maximizar km por kWh consumido.</div>
         <div class="flex gap-2">
           <span class="inline-block px-2 py-0.5 rounded text-xs" style="background:#F59E0B; color:#0D1B2A;">Ruteo</span>
           <span class="inline-block px-2 py-0.5 rounded text-xs" style="background:#1B4F72;">Q-Learning</span>
@@ -776,12 +885,12 @@ class: dark-slide
       </div>
     </div>
   </div>
-  <div v-click class="rounded-lg p-3" style="background:#2a2010; border: 1px solid #F59E0B40;">
+  <div v-click class="rounded-lg p-2" style="background:#2a2010; border: 1px solid #F59E0B40;">
     <div class="flex items-start gap-2">
       <mdi-factory class="text-xl" />
       <div>
         <div class="font-bold mb-1" style="color:#F59E0B;">Coordinacion de carga — Parque Industrial Bermúdez</div>
-        <div class="text-xs mb-1">Multi-Agent RL coordina la carga de 50 EVs de flota maquiladora para no exceder el limite de la subestacion CFE. Cada EV es un agente que negocia su turno de carga.</div>
+        <div class="text-xs mb-1">Multi-Agent RL coordina 50 EVs para no exceder el límite de la subestacion CFE. Cada EV negocia su turno de carga.</div>
         <div class="flex gap-2">
           <span class="inline-block px-2 py-0.5 rounded text-xs" style="background:#F59E0B; color:#0D1B2A;">Coordinacion</span>
           <span class="inline-block px-2 py-0.5 rounded text-xs" style="background:#1B4F72;">Multi-Agent RL</span>
@@ -790,7 +899,6 @@ class: dark-slide
       </div>
     </div>
   </div>
-</div>
 </div>
 
 ---
@@ -1188,7 +1296,7 @@ class: dark-slide
 
 ---
 layout: image-right
-image: https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=800&q=80
+image: /img/b01-analytics.jpg
 class: dark-slide
 ---
 

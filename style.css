@@ -52,7 +52,7 @@ h2 { color: var(--accent); }
 /* Scrollable content area for overflow slides */
 .slide-scroll {
   overflow-y: auto;
-  max-height: 390px;
+  max-height: 450px;
   padding-right: 6px;
 }
 
