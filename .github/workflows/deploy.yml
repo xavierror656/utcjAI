@@ -40,10 +40,7 @@ jobs:
 
       - name: Prepare dist
         run: |
-          mkdir -p dist
-          # Slidev escribe relativo al directorio del archivo .md → slides/dist/
-          cp -r slides/dist/. dist/
-          # Index principal y .nojekyll para que GitHub Pages sirva assets con _
+          # index.html principal y .nojekyll para que GitHub Pages sirva assets con _
           cp index.html dist/index.html
           touch dist/.nojekyll
 

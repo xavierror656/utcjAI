@@ -12,14 +12,14 @@
     "dev:06": "slidev slides/bloque-06.md --port 3006",
     "dev:07": "slidev slides/bloque-07.md --port 3007",
     "dev:08": "slidev slides/bloque-08.md --port 3008",
-    "build:01": "slidev build slides/bloque-01.md --out dist/bloque-01 --base /utcjAI/bloque-01/",
-    "build:02": "slidev build slides/bloque-02.md --out dist/bloque-02 --base /utcjAI/bloque-02/",
-    "build:03": "slidev build slides/bloque-03.md --out dist/bloque-03 --base /utcjAI/bloque-03/",
-    "build:04": "slidev build slides/bloque-04.md --out dist/bloque-04 --base /utcjAI/bloque-04/",
-    "build:05": "slidev build slides/bloque-05.md --out dist/bloque-05 --base /utcjAI/bloque-05/",
-    "build:06": "slidev build slides/bloque-06.md --out dist/bloque-06 --base /utcjAI/bloque-06/",
-    "build:07": "slidev build slides/bloque-07.md --out dist/bloque-07 --base /utcjAI/bloque-07/",
-    "build:08": "slidev build slides/bloque-08.md --out dist/bloque-08 --base /utcjAI/bloque-08/"
+    "build:01": "slidev build slides/bloque-01.md --out ../dist/bloque-01 --base /utcjAI/bloque-01/",
+    "build:02": "slidev build slides/bloque-02.md --out ../dist/bloque-02 --base /utcjAI/bloque-02/",
+    "build:03": "slidev build slides/bloque-03.md --out ../dist/bloque-03 --base /utcjAI/bloque-03/",
+    "build:04": "slidev build slides/bloque-04.md --out ../dist/bloque-04 --base /utcjAI/bloque-04/",
+    "build:05": "slidev build slides/bloque-05.md --out ../dist/bloque-05 --base /utcjAI/bloque-05/",
+    "build:06": "slidev build slides/bloque-06.md --out ../dist/bloque-06 --base /utcjAI/bloque-06/",
+    "build:07": "slidev build slides/bloque-07.md --out ../dist/bloque-07 --base /utcjAI/bloque-07/",
+    "build:08": "slidev build slides/bloque-08.md --out ../dist/bloque-08 --base /utcjAI/bloque-08/"
   },
   "dependencies": {
     "@slidev/cli": "latest",
