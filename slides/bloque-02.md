@@ -1304,6 +1304,383 @@ class: dark-slide
 </div>
 
 ---
+layout: default
+class: dark-slide
+---
+
+# Optical Flow — Detectar Movimiento entre Frames
+
+<img src="/img/b02-selfdriving.jpg" class="absolute right-0 top-0 h-full w-1/3 object-cover opacity-10 -z-1" />
+
+<div class="grid grid-cols-2 gap-4 mt-3">
+  <div>
+    <div class="text-accent font-bold mb-2">¿Qué es?</div>
+    <div class="text-sm mb-3">Técnica que calcula el <span class="text-accent font-bold">vector de desplazamiento</span> de cada píxel entre dos frames consecutivos. Revela velocidad y dirección de objetos sin necesidad de etiquetas.</div>
+    <div v-click class="card-ev p-3 mb-2 text-sm">
+      <div class="text-accent font-bold mb-1"><mdi-car-speed-limiter class="inline" /> Aplicaciones en EV</div>
+      <div class="space-y-1 text-xs muted">
+        <div>→ Detectar peatones cruzando a alta velocidad</div>
+        <div>→ Estimar velocidad relativa de vehículo adelante</div>
+        <div>→ Detectar objetos que irrumpen el carril</div>
+      </div>
+    </div>
+    <div v-click class="card-ev p-3 text-sm">
+      <div class="font-bold mb-1" style="color:#10B981;"><mdi-wrench class="inline" /> Algoritmos populares</div>
+      <div class="text-xs muted space-y-1">
+        <div><span class="text-accent">Lucas-Kanade</span> — rápido, sparse (puntos clave)</div>
+        <div><span class="text-accent">Farnebäck</span> — denso, cubre toda la imagen</div>
+        <div><span class="text-accent">FlowNet / RAFT</span> — redes neuronales, más preciso</div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="text-accent font-bold mb-2">Comparativa de métodos</div>
+    <div v-click class="space-y-2 text-xs">
+      <div class="rounded p-2" style="background:#1a3a2a; border:1px solid #10B98140;">
+        <div class="font-bold" style="color:#10B981;">Lucas-Kanade (sparse)</div>
+        <div class="muted mt-1">Velocidad: ⚡⚡⚡ · Precisión: ★★☆</div>
+        <div class="muted">Ideal: tiempo real en ECU de bajo costo</div>
+      </div>
+      <div class="rounded p-2" style="background:#1B4F72; border:1px solid #00D4FF40;">
+        <div class="font-bold text-accent">Farnebäck (dense)</div>
+        <div class="muted mt-1">Velocidad: ⚡⚡☆ · Precisión: ★★★</div>
+        <div class="muted">Ideal: análisis de escena completa</div>
+      </div>
+      <div class="rounded p-2" style="background:#2a1500; border:1px solid #F59E0B40;">
+        <div class="font-bold" style="color:#F59E0B;">RAFT (deep learning)</div>
+        <div class="muted mt-1">Velocidad: ⚡☆☆ · Precisión: ★★★</div>
+        <div class="muted">Ideal: análisis offline / GPU dedicada</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+---
+layout: default
+class: dark-slide
+---
+
+# Visión en Condiciones Adversas — Reto de Juárez
+
+<div class="slide-scroll mt-2">
+
+```mermaid
+%%{init: {'theme': 'dark', 'themeVariables': {'primaryColor': '#1B4F72', 'primaryTextColor': '#E8F4FD', 'primaryBorderColor': '#00D4FF', 'lineColor': '#00D4FF'}}}%%
+flowchart TD
+    COND["🌍 Condiciones en Ciudad Juárez"] --> DUST["🌵 Polvo y Arena\nTormentas de polvo frecuentes"]
+    COND --> SUN["☀️ Sol Intenso\nDeslumbramiento 45°C+ verano"]
+    COND --> NIGHT["🌙 Noche\nZonas con poca iluminación"]
+    COND --> RAIN["🌧️ Lluvia ocasional\nReflejos en asfalto mojado"]
+
+    DUST --> SOL1["Solución: LiDAR + Cámara Térmica\nFusion anula puntos ciegos"]
+    SUN --> SOL2["Solución: HDR + Polarización\nAjuste automático de exposición"]
+    NIGHT --> SOL3["Solución: Cámara IR / Térmica\nIluminación activa NIR"]
+    RAIN --> SOL4["Solución: Radar + Procesamiento\nKalman filter para objetos ocultos"]
+
+    style COND fill:#1B4F72,color:#E8F4FD,stroke:#00D4FF
+    style DUST fill:#2a1500,color:#F59E0B,stroke:#F59E0B
+    style SUN fill:#2a1500,color:#F59E0B,stroke:#F59E0B
+    style NIGHT fill:#0D1B2A,color:#64748B,stroke:#64748B
+    style RAIN fill:#1a3a2a,color:#10B981,stroke:#10B981
+    style SOL1 fill:#0D1B2A,color:#E8F4FD,stroke:#1B4F72
+    style SOL2 fill:#0D1B2A,color:#E8F4FD,stroke:#1B4F72
+    style SOL3 fill:#0D1B2A,color:#E8F4FD,stroke:#1B4F72
+    style SOL4 fill:#0D1B2A,color:#E8F4FD,stroke:#1B4F72
+```
+
+</div>
+
+---
+layout: default
+class: dark-slide
+---
+
+# Stereo Vision — Profundidad sin LiDAR
+
+<img src="/img/b02-camera-car.jpg" class="absolute right-0 top-0 h-full w-1/3 object-cover opacity-10 -z-1" />
+
+<div class="grid grid-cols-2 gap-4 mt-3">
+  <div>
+    <div class="text-accent font-bold mb-2">Principio</div>
+    <div class="text-sm mb-3">Dos cámaras separadas capturan la misma escena. La <span class="text-accent font-bold">disparidad</span> (diferencia de posición del mismo punto) permite calcular profundidad: <span class="text-accent">Z = f · B / d</span></div>
+    <div class="card-ev p-3 text-xs mb-2">
+      <div class="font-bold text-accent mb-1">Variables</div>
+      <div><span class="text-accent">f</span> = distancia focal (px)</div>
+      <div><span class="text-accent">B</span> = baseline entre cámaras (m)</div>
+      <div><span class="text-accent">d</span> = disparidad (px)</div>
+    </div>
+    <div v-click class="card-ev p-3 text-xs">
+      <div class="font-bold mb-1" style="color:#10B981;">Ventaja clave para EV</div>
+      <div class="muted">Costo mucho menor que LiDAR. Tesla, Waymo y BYD usan arrays de cámaras stereo para estimar distancia a obstáculos.</div>
+    </div>
+  </div>
+  <div>
+    <div class="text-accent font-bold mb-2">Pipeline</div>
+    <div v-click class="space-y-2 text-xs">
+      <div class="card-ev p-2"><span class="text-accent font-bold">1. Rectificación</span> — alinear imágenes de ambas cámaras</div>
+      <div class="card-ev p-2"><span class="text-accent font-bold">2. Matching</span> — encontrar puntos correspondientes (SGM/CNN)</div>
+      <div class="card-ev p-2"><span class="text-accent font-bold">3. Mapa de disparidad</span> — imagen donde intensidad = profundidad</div>
+      <div class="card-ev p-2"><span class="text-accent font-bold">4. Reconstrucción 3D</span> — nube de puntos liviana vs LiDAR</div>
+    </div>
+    <div v-click class="rounded p-2 mt-2 text-xs" style="background:#2a1500; border:1px solid #F59E0B40;">
+      <span class="font-bold" style="color:#F59E0B;">Limitación:</span>
+      <span class="muted"> Pierde precisión a >50m y en superficies sin textura (asfalto liso)</span>
+    </div>
+  </div>
+</div>
+
+---
+layout: default
+class: dark-slide
+---
+
+# Multi-Object Tracking (MOT)
+
+<div class="slide-scroll mt-2">
+
+```mermaid
+%%{init: {'theme': 'dark', 'themeVariables': {'primaryColor': '#1B4F72', 'primaryTextColor': '#E8F4FD', 'primaryBorderColor': '#00D4FF', 'lineColor': '#00D4FF'}}}%%
+flowchart LR
+    CAM(["📷 Frame t"]) --> DET["Detección\nYOLO / SSD"]
+    DET --> BBOX["Bounding Boxes\n+ Clase + Conf."]
+    BBOX --> MATCH{"Asociación\nHungarian Algorithm\n+ IoU"}
+    MATCH -->|"ID conocido"| UPD["Actualizar Track\nKalman Filter"]
+    MATCH -->|"Objeto nuevo"| NEW["Crear Track\nnuevo ID"]
+    MATCH -->|"Sin match\nN frames"| DEL["Eliminar Track\n(salió de escena)"]
+    UPD --> OUT(["🚗 ID:3 · Peatón\nVelocidad: 1.2 m/s\nTrayectoria"])
+    NEW --> OUT
+    style CAM fill:#1B4F72,color:#E8F4FD,stroke:#00D4FF
+    style DET fill:#243B55,color:#E8F4FD,stroke:#1B4F72
+    style MATCH fill:#2a1500,color:#F59E0B,stroke:#F59E0B
+    style UPD fill:#1a3a2a,color:#10B981,stroke:#10B981
+    style NEW fill:#1a3a2a,color:#10B981,stroke:#10B981
+    style DEL fill:#3a0000,color:#ef4444,stroke:#ef4444
+    style OUT fill:#1B4F72,color:#00D4FF,stroke:#00D4FF
+```
+
+</div>
+
+<div class="grid grid-cols-3 gap-3 mt-3 text-xs">
+  <div v-click class="card-ev p-2 text-center">
+    <div class="text-accent font-bold">SORT</div>
+    <div class="muted mt-1">Simple + rápido · Kalman + IoU · sin re-ID</div>
+  </div>
+  <div v-click class="card-ev p-2 text-center">
+    <div class="text-accent font-bold">DeepSORT</div>
+    <div class="muted mt-1">Re-identificación visual · sobrevive oclusiones</div>
+  </div>
+  <div v-click class="card-ev p-2 text-center">
+    <div class="text-accent font-bold">ByteTrack</div>
+    <div class="muted mt-1">SOTA 2022 · usa detecciones de baja confianza</div>
+  </div>
+</div>
+
+---
+layout: default
+class: dark-slide
+---
+
+# Cámara Térmica — Ver en la Oscuridad
+
+<img src="/img/b02-sensors.jpg" class="absolute right-0 top-0 h-full w-1/3 object-cover opacity-10 -z-1" />
+
+<div class="grid grid-cols-2 gap-4 mt-3">
+  <div>
+    <div class="text-accent font-bold mb-2">¿Cómo funciona?</div>
+    <div class="text-sm mb-3">Detecta <span class="text-accent font-bold">radiación infrarroja</span> (calor) emitida por todos los cuerpos. No necesita luz visible — funciona a 0 lux.</div>
+    <div v-click class="card-ev p-3 mb-2 text-xs">
+      <div class="text-accent font-bold mb-1">Espectro de temperatura</div>
+      <div class="space-y-1 muted">
+        <div><span style="color:#ef4444;">■</span> Persona / animal: 36–37°C → blanco/rojo</div>
+        <div><span style="color:#F59E0B;">■</span> Motor activo: 80–120°C → muy brillante</div>
+        <div><span style="color:#1B4F72;">■</span> Asfalto nocturno: 20–25°C → oscuro</div>
+      </div>
+    </div>
+    <div v-click class="card-ev p-3 text-xs" style="border:1px solid #10B981;">
+      <div class="font-bold mb-1" style="color:#10B981;">Caso de uso Juárez</div>
+      <div class="muted">Cruces peatonales sin iluminación en la periferia de CJ. Detectar personas a 150m en zonas oscuras donde la cámara RGB falla.</div>
+    </div>
+  </div>
+  <div>
+    <div class="text-accent font-bold mb-2">RGB vs Térmica</div>
+    <div class="space-y-2 text-xs">
+      <div v-click class="rounded p-2" style="background:#1a3a2a; border:1px solid #10B98140;">
+        <div class="font-bold" style="color:#10B981;">Cámara Térmica ✓</div>
+        <div class="muted mt-1">Noche total · Humo · Polvo · sin necesitar luz</div>
+      </div>
+      <div v-click class="rounded p-2" style="background:#1B4F72; border:1px solid #00D4FF40;">
+        <div class="font-bold text-accent">Cámara RGB ✓</div>
+        <div class="muted mt-1">Colores · Textos · Semáforos · Alta resolución</div>
+      </div>
+      <div v-click class="rounded p-2" style="background:#243B55; border:1px solid #1B4F7280;">
+        <div class="font-bold text-white">Fusión RGB + Térmica ✓✓</div>
+        <div class="muted mt-1">Detección robusta 24/7 en cualquier condición</div>
+      </div>
+    </div>
+    <div class="mt-2 text-xs muted">Sensores comerciales: FLIR Lepton (~$200), Bosch BMI088 thermal</div>
+  </div>
+</div>
+
+---
+layout: default
+class: dark-slide
+---
+
+# Calibración de Cámara — Coordenadas del Mundo Real
+
+<img src="/img/b02-robot-vision.jpg" class="absolute right-0 top-0 h-full w-1/3 object-cover opacity-10 -z-1" />
+
+<div class="grid grid-cols-2 gap-4 mt-3">
+  <div>
+    <div class="text-accent font-bold mb-2">¿Por qué calibrar?</div>
+    <div class="text-sm mb-3">Una cámara sin calibrar distorsiona la escena — un objeto a 30m parece estar a 20m. La calibración mapea <span class="text-accent font-bold">píxeles → metros reales</span>.</div>
+    <div v-click class="card-ev p-3 text-xs mb-2">
+      <div class="text-accent font-bold mb-1">Matriz Intrínseca K</div>
+      <div class="font-mono text-xs" style="color:#10B981;">
+        K = [ fx  0  cx ]<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;[  0 fy  cy ]<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;[  0  0   1 ]
+      </div>
+      <div class="muted mt-1">fx, fy = focal length · cx, cy = centro óptico</div>
+    </div>
+    <div v-click class="card-ev p-3 text-xs">
+      <div class="font-bold mb-1" style="color:#F59E0B;">Distorsión radial</div>
+      <div class="muted">Lentes baratas curvan líneas rectas → OpenCV `calibrateCamera()` estima coeficientes k1, k2, p1, p2</div>
+    </div>
+  </div>
+  <div>
+    <div class="text-accent font-bold mb-2">Proceso con tablero de ajedrez</div>
+    <div class="space-y-2 text-xs">
+      <div v-click class="card-ev p-2"><span class="text-accent font-bold">1.</span> Capturar 20–30 fotos del tablero desde distintos ángulos</div>
+      <div v-click class="card-ev p-2"><span class="text-accent font-bold">2.</span> Detectar esquinas con <span class="text-accent">findChessboardCorners()</span></div>
+      <div v-click class="card-ev p-2"><span class="text-accent font-bold">3.</span> Ejecutar <span class="text-accent">calibrateCamera()</span> → matriz K + coeficientes D</div>
+      <div v-click class="card-ev p-2"><span class="text-accent font-bold">4.</span> Aplicar <span class="text-accent">undistort()</span> a cada frame antes del modelo</div>
+    </div>
+    <div class="mt-2 text-xs muted">Error < 0.5px RMS = calibración aceptable para producción</div>
+  </div>
+</div>
+
+---
+layout: default
+class: dark-slide
+---
+
+# Pipeline Sensor Fusion Completo
+
+<div class="slide-scroll mt-2">
+
+```mermaid
+%%{init: {'theme': 'dark', 'themeVariables': {'primaryColor': '#1B4F72', 'primaryTextColor': '#E8F4FD', 'primaryBorderColor': '#00D4FF', 'lineColor': '#00D4FF'}}}%%
+flowchart TD
+    subgraph SENSORES["🔌 Capa de Sensores"]
+        CAM["📷 Cámara RGB\n30-60 fps · 2D"]
+        LIDAR["🔴 LiDAR\n10-20 fps · 3D"]
+        RADAR["📡 Radar\n20 fps · velocidad"]
+        THERM["🌡️ Térmica\n25 fps · temperatura"]
+    end
+
+    subgraph PROC["⚙️ Procesamiento Individual"]
+        YOLO["YOLOv8\nbbox 2D + clase"]
+        PCD["Point Cloud\nfiltrado + clustering"]
+        VEL["Velocidad radial\nde objetos"]
+        SEG["Segmentación térmica\npeatones nocturnos"]
+    end
+
+    subgraph FUSION["🔗 Fusión (Kalman / DeepFusion)"]
+        ALIGN["Alineación temporal\ny espacial"]
+        FUSE["Fusión de hipótesis\n+ confianza ponderada"]
+    end
+
+    OUT(["🚗 Objeto unificado\nID · Clase · Posición 3D\nVelocidad · Confianza"])
+
+    CAM --> YOLO --> ALIGN
+    LIDAR --> PCD --> ALIGN
+    RADAR --> VEL --> ALIGN
+    THERM --> SEG --> ALIGN
+    ALIGN --> FUSE --> OUT
+
+    style SENSORES fill:#0D1B2A,stroke:#1B4F72
+    style PROC fill:#0D1B2A,stroke:#243B55
+    style FUSION fill:#0D1B2A,stroke:#00D4FF
+    style OUT fill:#1a3a2a,color:#10B981,stroke:#10B981
+```
+
+</div>
+
+---
+layout: default
+class: dark-slide
+---
+
+# Benchmark — Modelos de Visión en Hardware EV
+
+<img src="/img/b02-detection.jpg" class="absolute right-0 top-0 h-full w-1/3 object-cover opacity-10 -z-1" />
+
+<div class="slide-scroll mt-2">
+<div class="text-xs mb-3 muted">Comparativa de modelos populares en hardware típico de vehículos eléctricos embebidos</div>
+
+<table class="w-full text-xs border-collapse">
+  <thead>
+    <tr style="background:#1B4F72; color:#00D4FF;">
+      <th class="p-2 text-left">Modelo</th>
+      <th class="p-2 text-center">mAP@0.5</th>
+      <th class="p-2 text-center">FPS Jetson Nano</th>
+      <th class="p-2 text-center">FPS Jetson Orin</th>
+      <th class="p-2 text-center">Tamaño</th>
+      <th class="p-2 text-left">Ideal para</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr v-click style="background:#0D1B2A; border-bottom:1px solid #1B4F72;">
+      <td class="p-2 font-bold text-accent">YOLOv8n</td>
+      <td class="p-2 text-center" style="color:#10B981;">37.3%</td>
+      <td class="p-2 text-center">28 fps</td>
+      <td class="p-2 text-center">180 fps</td>
+      <td class="p-2 text-center">3.2 MB</td>
+      <td class="p-2 muted">ECU bajo costo, tiempo real</td>
+    </tr>
+    <tr v-click style="background:#0D1B2A; border-bottom:1px solid #1B4F72;">
+      <td class="p-2 font-bold text-accent">YOLOv8s</td>
+      <td class="p-2 text-center" style="color:#10B981;">44.9%</td>
+      <td class="p-2 text-center">15 fps</td>
+      <td class="p-2 text-center">110 fps</td>
+      <td class="p-2 text-center">11.2 MB</td>
+      <td class="p-2 muted">Balance velocidad/precisión</td>
+    </tr>
+    <tr v-click style="background:#0D1B2A; border-bottom:1px solid #1B4F72;">
+      <td class="p-2 font-bold text-accent">YOLOv8m</td>
+      <td class="p-2 text-center" style="color:#F59E0B;">50.2%</td>
+      <td class="p-2 text-center">7 fps</td>
+      <td class="p-2 text-center">65 fps</td>
+      <td class="p-2 text-center">25.9 MB</td>
+      <td class="p-2 muted">GPU dedicada, alta precisión</td>
+    </tr>
+    <tr v-click style="background:#0D1B2A; border-bottom:1px solid #1B4F72;">
+      <td class="p-2 font-bold" style="color:#64748B;">MobileNetV3</td>
+      <td class="p-2 text-center" style="color:#64748B;">29.8%</td>
+      <td class="p-2 text-center">45 fps</td>
+      <td class="p-2 text-center">250 fps</td>
+      <td class="p-2 text-center">1.5 MB</td>
+      <td class="p-2 muted">Microcontroladores STM32</td>
+    </tr>
+    <tr v-click style="background:#0D1B2A;">
+      <td class="p-2 font-bold" style="color:#64748B;">EfficientDet-D0</td>
+      <td class="p-2 text-center" style="color:#F59E0B;">33.8%</td>
+      <td class="p-2 text-center">20 fps</td>
+      <td class="p-2 text-center">130 fps</td>
+      <td class="p-2 text-center">3.9 MB</td>
+      <td class="p-2 muted">Google Coral TPU</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="mt-3 p-2 rounded text-xs" style="background:#1a3a2a; border:1px solid #10B98140;">
+  <span style="color:#10B981;" class="font-bold">Recomendación UTCJ:</span>
+  <span class="muted"> YOLOv8n en Jetson Nano (~$150) es el punto de entrada óptimo para proyectos de detección en EV con presupuesto universitario</span>
+</div>
+</div>
+
+---
 layout: center
 class: dark-slide
 ---
