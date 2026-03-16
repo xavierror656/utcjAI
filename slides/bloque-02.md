@@ -594,34 +594,54 @@ class: dark-slide
 </div>
 
 ---
-layout: image-right
-image: /img/b02-selfdriving.jpg
+layout: default
+class: dark-slide
 ---
 
 # YOLO — You Only Look Once
 
-<div class="space-y-2 mt-2">
+<img src="/img/b02-selfdriving.jpg" class="absolute right-0 top-0 h-full w-2/5 object-cover opacity-8 -z-1" />
+
+<div class="grid grid-cols-2 gap-3 mt-3">
   <div v-click class="card-ev p-3">
-    <div class="text-accent font-bold mb-1">¿Por qué YOLO es especial?</div>
-    <div class="text-xs muted">Divide la imagen en cuadrícula S×S. Cada celda predice N bounding boxes + confianza + clases en un solo forward pass. Resultado: 6–50ms por imagen.</div>
+    <div class="text-accent font-bold mb-2">¿Por qué YOLO es especial?</div>
+    <div class="text-xs muted">Divide la imagen en cuadrícula <span class="text-accent">S×S</span>. Cada celda predice N bounding boxes + confianza + clases en un <span class="text-accent">solo forward pass</span>.</div>
+    <div class="mt-2 text-xs font-bold" style="color:#10B981;">Resultado: 6–50 ms por imagen</div>
   </div>
+
   <div v-click class="card-ev p-3">
-    <div class="text-accent font-bold mb-1">Evolución de versiones</div>
-    <div class="grid grid-cols-2 gap-1 text-xs muted">
-      <div>YOLOv1 (2015): concepto original</div>
-      <div>YOLOv3 (2018): detección multi-escala</div>
-      <div>YOLOv5 (2020): PyTorch nativo</div>
-      <div>YOLOv8 (2023): Ultralytics API</div>
-      <div class="col-span-2 text-accent font-bold">YOLOv11 (2024): última versión</div>
+    <div class="text-accent font-bold mb-2">Evolución de versiones</div>
+    <div class="space-y-1 text-xs">
+      <div class="flex justify-between muted"><span>YOLOv1 (2015)</span><span>concepto original</span></div>
+      <div class="flex justify-between muted"><span>YOLOv3 (2018)</span><span>detección multi-escala</span></div>
+      <div class="flex justify-between muted"><span>YOLOv5 (2020)</span><span>PyTorch nativo</span></div>
+      <div class="flex justify-between muted"><span>YOLOv8 (2023)</span><span>Ultralytics API</span></div>
+      <div class="flex justify-between text-accent font-bold"><span>YOLOv11 (2024)</span><span>última versión</span></div>
     </div>
   </div>
+
   <div v-click class="card-ev p-3">
-    <div class="font-bold mb-1" style="color:#10B981;">Velocidades en tiempo real (GPU)</div>
-    <div class="text-xs muted">YOLOv8-nano: <span class="success">~6ms</span> por imagen. YOLOv8-large: <span class="warning">~52ms</span>. Ambos suficientes para 30fps en dashcam de flota maquiladora</div>
+    <div class="font-bold mb-2" style="color:#10B981;">Velocidades en tiempo real</div>
+    <div class="flex gap-3 text-xs">
+      <div class="text-center flex-1 rounded p-2" style="background:#0D1B2A;">
+        <div class="text-accent font-bold text-base">~6 ms</div>
+        <div class="muted mt-1">YOLOv8-nano</div>
+      </div>
+      <div class="text-center flex-1 rounded p-2" style="background:#0D1B2A;">
+        <div class="font-bold text-base" style="color:#F59E0B;">~52 ms</div>
+        <div class="muted mt-1">YOLOv8-large</div>
+      </div>
+    </div>
+    <div class="text-xs muted mt-2">Ambos sirven para 30 fps en dashcam de flota</div>
   </div>
+
   <div v-click class="card-ev p-3">
-    <div class="font-bold mb-1 warning">Elegir modelo según dispositivo</div>
-    <div class="text-xs muted">nano/small → Jetson Nano, RPi 5<br/>medium → PC con GPU básica<br/>large/x → Servidor / Tesla HW3</div>
+    <div class="font-bold mb-2" style="color:#F59E0B;">Elegir modelo según dispositivo</div>
+    <div class="space-y-1 text-xs">
+      <div class="flex items-center gap-2"><span class="badge-ev">nano/s</span><span class="muted">Jetson Nano · RPi 5</span></div>
+      <div class="flex items-center gap-2"><span class="badge-ev">medium</span><span class="muted">PC con GPU básica</span></div>
+      <div class="flex items-center gap-2"><span class="badge-ev">large/x</span><span class="muted">Servidor · Tesla HW3</span></div>
+    </div>
   </div>
 </div>
 
