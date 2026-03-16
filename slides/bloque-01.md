@@ -110,7 +110,7 @@ class: dark-slide
 
 # Mapa Conceptual — IA, ML y Deep Learning
 
-<div class="mt-2">
+<div class="slide-scroll mt-2">
 
 ```mermaid
 %%{init: {'theme': 'dark', 'themeVariables': {'primaryColor': '#1B4F72', 'primaryTextColor': '#E8F4FD', 'primaryBorderColor': '#00D4FF', 'lineColor': '#00D4FF', 'secondaryColor': '#0D1B2A', 'tertiaryColor': '#243B55'}}}%%
@@ -442,7 +442,7 @@ class: dark-slide
 
 # ¿Qué paradigma ML usar en tu proyecto EV?
 
-<div class="mt-2">
+<div class="slide-scroll mt-2">
 
 ```mermaid
 %%{init: {'theme': 'dark', 'themeVariables': {'primaryColor': '#1B4F72', 'primaryTextColor': '#E8F4FD', 'primaryBorderColor': '#00D4FF', 'lineColor': '#00D4FF'}}}%%
@@ -528,7 +528,7 @@ class: dark-slide
 
 # Pipeline de Entrenamiento Supervisado
 
-<div class="mt-3">
+<div class="slide-scroll mt-3">
 
 ```mermaid
 %%{init: {'theme': 'dark', 'themeVariables': {'primaryColor': '#1B4F72', 'primaryTextColor': '#E8F4FD', 'primaryBorderColor': '#00D4FF', 'lineColor': '#00D4FF'}}}%%
@@ -817,7 +817,7 @@ class: dark-slide
 
 # Ciclo del Agente de Aprendizaje por Refuerzo
 
-<div class="mt-4">
+<div class="slide-scroll mt-4">
 
 ```mermaid
 %%{init: {'theme': 'dark', 'themeVariables': {'primaryColor': '#1B4F72', 'primaryTextColor': '#E8F4FD', 'primaryBorderColor': '#00D4FF', 'lineColor': '#F59E0B'}}}%%
