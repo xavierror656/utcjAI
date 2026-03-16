@@ -1,5 +1,5 @@
 ---
-theme: default
+theme: penguin
 title: "Bloque 03 — Arquitectura de Sistemas de IA y Deployment"
 titleTemplate: "%s | IA Electromovilidad"
 info: |
@@ -9,6 +9,7 @@ info: |
 transition: slide-left
 class: dark-slide
 mdc: true
+zoom: 0.85
 fonts:
   sans: 'Segoe UI'
 ---
