@@ -1,0 +1,34 @@
+{
+  "name": "curso-ia-electromovilidad",
+  "version": "1.0.0",
+  "description": "IA Aplicada a la Electromovilidad — 8 bloques con Slidev",
+  "scripts": {
+    "dev": "slidev slides/bloque-01.md",
+    "dev:01": "slidev slides/bloque-01.md --port 3001",
+    "dev:02": "slidev slides/bloque-02.md --port 3002",
+    "dev:03": "slidev slides/bloque-03.md --port 3003",
+    "dev:04": "slidev slides/bloque-04.md --port 3004",
+    "dev:05": "slidev slides/bloque-05.md --port 3005",
+    "dev:06": "slidev slides/bloque-06.md --port 3006",
+    "dev:07": "slidev slides/bloque-07.md --port 3007",
+    "dev:08": "slidev slides/bloque-08.md --port 3008",
+    "build:01": "slidev build slides/bloque-01.md --out dist/bloque-01 --base /bloque-01/",
+    "build:02": "slidev build slides/bloque-02.md --out dist/bloque-02 --base /bloque-02/",
+    "build:03": "slidev build slides/bloque-03.md --out dist/bloque-03 --base /bloque-03/",
+    "build:04": "slidev build slides/bloque-04.md --out dist/bloque-04 --base /bloque-04/",
+    "build:05": "slidev build slides/bloque-05.md --out dist/bloque-05 --base /bloque-05/",
+    "build:06": "slidev build slides/bloque-06.md --out dist/bloque-06 --base /bloque-06/",
+    "build:07": "slidev build slides/bloque-07.md --out dist/bloque-07 --base /bloque-07/",
+    "build:08": "slidev build slides/bloque-08.md --out dist/bloque-08 --base /bloque-08/"
+  },
+  "dependencies": {
+    "@slidev/cli": "latest",
+    "@slidev/theme-default": "latest",
+    "slidev-theme-penguin": "^2.3.1"
+  },
+  "devDependencies": {
+    "@iconify-json/logos": "^1.2.10",
+    "@iconify-json/mdi": "^1.2.3",
+    "vue": "latest"
+  }
+}
