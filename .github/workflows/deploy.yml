@@ -29,12 +29,16 @@ jobs:
 
       - name: Build bloques
         run: |
-          mkdir -p dist
           npm run build:01
           npm run build:02
 
-      - name: Copy index to dist
-        run: cp index.html dist/index.html
+      - name: Prepare dist
+        run: |
+          # Slidev puede escribir relativo al entry file (slides/) o al CWD
+          if [ -d "slides/dist" ] && [ ! -d "dist" ]; then
+            mv slides/dist dist
+          fi
+          cp index.html dist/index.html
 
       - uses: actions/upload-pages-artifact@v3
         with:
