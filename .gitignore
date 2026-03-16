@@ -3,3 +3,6 @@ dist/
 .slidev/
 *.local
 .DS_Store
+.agents/
+logs/
+.claude/
