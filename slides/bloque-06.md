@@ -21,6 +21,12 @@ Encontrar el camino optimo con restriccion de bateria
 
 <div class="abs-br m-6 text-xs text-gray-400">2 horas | Teoria + Practica</div>
 
+<div class="absolute bottom-0 left-0 right-0 flex justify-center items-center gap-10 py-4 px-8" style="background: rgba(13,27,42,0.92); border-top: 1px solid rgba(0,212,255,0.4);">
+  <img src="/logos/1%20EDITABLE%20LOGO%20RGB-2.png" class="h-12 object-contain" />
+  <img src="/logos/2%20Demoinn_Imagotipo-Color-1-1024x775.png" class="h-20 object-contain" />
+  <img src="/logos/3%206647a1a689bdd0ed43fb9444_Logo-Fundacion-Coppel.png" class="h-24 object-contain" />
+  <img src="/logos/4%20changeandcodelogoTRANSblack.png" class="h-12 object-contain brightness-0 invert" />
+</div>
 <img src="/img/b06-map.jpg" class="absolute inset-0 w-full h-full object-cover opacity-20 -z-1" />
 
 ---
