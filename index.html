@@ -5,129 +5,580 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>IA Aplicada a la Electromovilidad — UTCJ</title>
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary: #0D1B2A;
+      --secondary: #1B4F72;
+      --accent: #00D4FF;
+      --success: #10B981;
+      --warning: #F59E0B;
+      --text: #E8F4FD;
+      --muted: #64748B;
+    }
+
+    html { scroll-behavior: smooth; }
+
     body {
       font-family: 'Segoe UI', system-ui, sans-serif;
-      background: #0D1B2A;
-      color: #E8F4FD;
+      background: var(--primary);
+      color: var(--text);
       min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── Canvas background ── */
+    #bg-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* ── Layout ── */
+    .page {
+      position: relative;
+      z-index: 1;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      padding: 2rem;
+      padding: 2.5rem 2rem 3rem;
+      min-height: 100vh;
     }
-    header { text-align: center; margin-bottom: 3rem; }
-    header h1 { color: #00D4FF; font-size: 1.8rem; margin-bottom: 0.5rem; }
-    header p { color: #64748B; font-size: 0.95rem; }
+
+    /* ── Header ── */
+    header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+      max-width: 680px;
+    }
+
+    .ev-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      margin-bottom: 1rem;
+    }
+
+    .bolt {
+      font-size: 2rem;
+      animation: pulse-bolt 2s ease-in-out infinite;
+      filter: drop-shadow(0 0 8px var(--accent));
+    }
+
+    @keyframes pulse-bolt {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(0.9); }
+    }
+
+    header h1 {
+      font-size: clamp(1.4rem, 3.5vw, 2rem);
+      color: var(--accent);
+      font-weight: 700;
+      line-height: 1.25;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 0 20px #00D4FF40;
+    }
+
+    header p {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    /* ── Stats bar ── */
+    .stats {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 1.5rem 0 2.5rem;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+      text-shadow: 0 0 12px #00D4FF60;
+    }
+
+    .stat-label {
+      font-size: 0.7rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-top: 0.2rem;
+    }
+
+    /* ── Battery charge bar ── */
+    .charge-bar-wrap {
+      width: 200px;
+      margin: 0 auto 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .charge-label {
+      font-size: 0.65rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      white-space: nowrap;
+    }
+
+    .battery {
+      flex: 1;
+      height: 10px;
+      background: #1B4F7260;
+      border-radius: 6px;
+      border: 1px solid #1B4F72;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .battery-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #10B981, var(--accent));
+      border-radius: 6px;
+      transition: width 2s cubic-bezier(0.4,0,0.2,1);
+      box-shadow: 0 0 8px var(--accent);
+    }
+
+    .battery-tip {
+      width: 4px;
+      height: 6px;
+      background: var(--muted);
+      border-radius: 0 2px 2px 0;
+      flex-shrink: 0;
+    }
+
+    /* ── Grid ── */
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.25rem;
-      max-width: 900px;
+      gap: 1.1rem;
+      max-width: 960px;
       width: 100%;
     }
+
+    /* ── Card ── */
     .card {
-      background: #1B4F72;
-      border-radius: 10px;
-      padding: 1.5rem;
+      background: linear-gradient(135deg, #1B4F7290 0%, #0D1B2A 100%);
+      border-radius: 12px;
+      padding: 1.25rem 1.4rem;
       text-decoration: none;
-      color: #E8F4FD;
-      transition: transform 0.15s, box-shadow 0.15s;
-      border: 1px solid #00D4FF20;
+      color: var(--text);
+      border: 1px solid #00D4FF18;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+      cursor: pointer;
     }
+
+    /* Electric arc corner */
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 40px; height: 40px;
+      background: radial-gradient(circle at top left, #00D4FF22, transparent 70%);
+      transition: opacity 0.2s;
+      opacity: 0;
+    }
+
+    /* Scan line effect */
+    .card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 0%, #00D4FF06 50%, transparent 100%);
+      transform: translateY(-100%);
+      transition: transform 0s;
+    }
+
     .card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 24px #00D4FF20;
-      border-color: #00D4FF60;
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px #00D4FF18, 0 0 0 1px #00D4FF40;
+      border-color: #00D4FF50;
     }
-    .card .num {
-      font-size: 0.7rem;
-      color: #00D4FF;
+
+    .card:hover::before { opacity: 1; }
+
+    .card:hover::after {
+      transform: translateY(200%);
+      transition: transform 0.6s linear;
+    }
+
+    .card-icon {
+      font-size: 1.4rem;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 0.6rem;
+      background: var(--accent);
+      color: var(--primary);
+      border-radius: 3px;
+      padding: 1px 7px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+    }
+
+    .num {
+      font-size: 0.65rem;
+      color: var(--accent);
       font-weight: 700;
       letter-spacing: 2px;
       text-transform: uppercase;
+      margin-bottom: 0.3rem;
+      opacity: 0.7;
+    }
+
+    .card h2 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text);
       margin-bottom: 0.4rem;
+      line-height: 1.35;
     }
-    .card h2 { font-size: 1rem; margin-bottom: 0.5rem; color: #00D4FF; }
-    .card p { font-size: 0.82rem; color: #94A3B8; }
-    .coming-soon {
-      opacity: 0.45;
-      pointer-events: none;
-      cursor: default;
+
+    .card p {
+      font-size: 0.75rem;
+      color: var(--muted);
+      line-height: 1.5;
     }
-    .badge {
-      display: inline-block;
-      font-size: 0.65rem;
-      background: #00D4FF;
-      color: #0D1B2A;
-      border-radius: 4px;
-      padding: 1px 8px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      margin-bottom: 0.6rem;
+
+    /* Progress dot */
+    .card-dot {
+      position: absolute;
+      top: 1rem; right: 1rem;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--success);
+      box-shadow: 0 0 6px var(--success);
+      animation: blink 3s ease-in-out infinite;
     }
-    .badge.soon { background: #1B4F72; color: #64748B; border: 1px solid #334155; }
-    footer { margin-top: 3rem; color: #334155; font-size: 0.75rem; text-align: center; }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    /* ── EV Road animation ── */
+    .road-wrap {
+      width: 100%;
+      max-width: 960px;
+      margin: 2.5rem 0 0.5rem;
+      position: relative;
+      height: 36px;
+      overflow: hidden;
+    }
+
+    .road-line {
+      position: absolute;
+      bottom: 4px;
+      left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #1B4F72, #00D4FF40, #1B4F72, transparent);
+    }
+
+    .ev-car {
+      position: absolute;
+      bottom: 8px;
+      font-size: 1.4rem;
+      animation: drive 8s linear infinite;
+      filter: drop-shadow(0 0 6px var(--accent));
+    }
+
+    @keyframes drive {
+      0%   { left: -60px; opacity: 0; }
+      5%   { opacity: 1; }
+      95%  { opacity: 1; }
+      100% { left: calc(100% + 60px); opacity: 0; }
+    }
+
+    .ev-trail {
+      position: absolute;
+      bottom: 12px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #00D4FF60);
+      animation: trail 8s linear infinite;
+      border-radius: 2px;
+    }
+
+    @keyframes trail {
+      0%   { left: -60px; width: 0; opacity: 0; }
+      5%   { opacity: 1; width: 30px; }
+      95%  { opacity: 1; }
+      100% { left: calc(100% + 60px); width: 60px; opacity: 0; }
+    }
+
+    /* ── Footer ── */
+    footer {
+      margin-top: 2rem;
+      color: var(--muted);
+      font-size: 0.72rem;
+      text-align: center;
+      opacity: 0.6;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 480px) {
+      .stats { gap: 1.2rem; }
+      .stat-value { font-size: 1.4rem; }
+    }
   </style>
 </head>
 <body>
+
+<canvas id="bg-canvas"></canvas>
+
+<div class="page">
+
   <header>
-    <h1>Inteligencia Artificial Aplicada a la Electromovilidad</h1>
-    <p>Universidad Tecnológica de Ciudad Juárez · 16 horas · 8 bloques</p>
+    <div class="ev-icon">
+      <span class="bolt">⚡</span>
+    </div>
+    <h1>Inteligencia Artificial<br>Aplicada a la Electromovilidad</h1>
+    <p>Universidad Tecnológica de Ciudad Juárez · Ciudad Juárez, Chihuahua</p>
   </header>
 
-  <div class="grid">
-    <a class="card" href="bloque-01/">
-      <div class="badge">DISPONIBLE</div>
-      <div class="num">Bloque 01</div>
-      <h2>Fundamentos de Machine Learning</h2>
-      <p>Supervisado, no supervisado, refuerzo · Métricas · Overfitting</p>
-    </a>
-    <a class="card" href="bloque-02/">
-      <div class="badge">DISPONIBLE</div>
-      <div class="num">Bloque 02</div>
-      <h2>Percepción del Entorno y Computer Vision</h2>
-      <p>Cámaras, LiDAR, detección de objetos · YOLO · Sensores</p>
-    </a>
-    <a class="card" href="bloque-03/">
-      <div class="badge">DISPONIBLE</div>
-      <div class="num">Bloque 03</div>
-      <h2>Arquitectura de Sistemas y Deployment</h2>
-      <p>Edge AI · GPU · Contenedores · CI/CD</p>
-    </a>
-    <a class="card" href="bloque-04/">
-      <div class="badge">DISPONIBLE</div>
-      <div class="num">Bloque 04</div>
-      <h2>Gestión Inteligente de Energía y Baterías</h2>
-      <p>BMS · SOC · SOH · Carga predictiva</p>
-    </a>
-    <a class="card" href="bloque-05/">
-      <div class="badge">DISPONIBLE</div>
-      <div class="num">Bloque 05</div>
-      <h2>Infraestructura de Carga Inteligente</h2>
-      <p>Smart grid · V2G · Optimización de red</p>
-    </a>
-    <a class="card" href="bloque-06/">
-      <div class="badge">DISPONIBLE</div>
-      <div class="num">Bloque 06</div>
-      <h2>Logística y Optimización de Rutas</h2>
-      <p>VRP · Flota EV · Algoritmos de routing</p>
-    </a>
-    <a class="card" href="bloque-07/">
-      <div class="badge">DISPONIBLE</div>
-      <div class="num">Bloque 07</div>
-      <h2>Tráfico Inteligente y Sistemas Multiagente</h2>
-      <p>SUMO · Semáforos adaptativos · V2X</p>
-    </a>
-    <a class="card" href="bloque-08/">
-      <div class="badge">DISPONIBLE</div>
-      <div class="num">Bloque 08</div>
-      <h2>Integración Integral con CARLA</h2>
-      <p>Simulación autónoma · Sensor fusion · ROS2</p>
-    </a>
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-value" data-target="8">0</div>
+      <div class="stat-label">Bloques</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value" data-target="16">0</div>
+      <div class="stat-label">Horas</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value" data-target="4">0</div>
+      <div class="stat-label">Diagramas Mermaid</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value" data-target="100">0</div>
+      <div class="stat-label">% Disponible</div>
+    </div>
   </div>
 
-  <footer>UTCJ · Ciudad Juárez, Chihuahua · 2025</footer>
+  <div class="charge-bar-wrap">
+    <span class="charge-label">Carga</span>
+    <div class="battery">
+      <div class="battery-fill" id="batt"></div>
+    </div>
+    <div class="battery-tip"></div>
+  </div>
+
+  <div class="grid">
+
+    <a class="card" href="bloque-01/">
+      <div class="card-dot"></div>
+      <span class="card-icon">🧠</span>
+      <div class="badge">Disponible</div>
+      <div class="num">Bloque 01</div>
+      <h2>Fundamentos de Machine Learning</h2>
+      <p>Supervisado · No supervisado · Refuerzo · Métricas · Overfitting</p>
+    </a>
+
+    <a class="card" href="bloque-02/">
+      <div class="card-dot"></div>
+      <span class="card-icon">📷</span>
+      <div class="badge">Disponible</div>
+      <div class="num">Bloque 02</div>
+      <h2>Percepción del Entorno y Computer Vision</h2>
+      <p>Cámaras · LiDAR · YOLO · Sensor Fusion · Optical Flow</p>
+    </a>
+
+    <a class="card" href="bloque-03/">
+      <div class="card-dot"></div>
+      <span class="card-icon">🔧</span>
+      <div class="badge">Disponible</div>
+      <div class="num">Bloque 03</div>
+      <h2>Arquitectura de Sistemas y Deployment</h2>
+      <p>Edge AI · GPU · Contenedores · CI/CD · Chips EV</p>
+    </a>
+
+    <a class="card" href="bloque-04/">
+      <div class="card-dot"></div>
+      <span class="card-icon">🔋</span>
+      <div class="badge">Disponible</div>
+      <div class="num">Bloque 04</div>
+      <h2>Gestión Inteligente de Energía y Baterías</h2>
+      <p>BMS · SOC · SOH · Carga predictiva · Degradación</p>
+    </a>
+
+    <a class="card" href="bloque-05/">
+      <div class="card-dot"></div>
+      <span class="card-icon">⚡</span>
+      <div class="badge">Disponible</div>
+      <div class="num">Bloque 05</div>
+      <h2>Infraestructura de Carga Inteligente</h2>
+      <p>Smart grid · V2G · Optimización de red · Energías renovables</p>
+    </a>
+
+    <a class="card" href="bloque-06/">
+      <div class="card-dot"></div>
+      <span class="card-icon">🗺️</span>
+      <div class="badge">Disponible</div>
+      <div class="num">Bloque 06</div>
+      <h2>Logística y Optimización de Rutas</h2>
+      <p>VRP · Flota EV · Algoritmos de routing · Restricción de batería</p>
+    </a>
+
+    <a class="card" href="bloque-07/">
+      <div class="card-dot"></div>
+      <span class="card-icon">🚦</span>
+      <div class="badge">Disponible</div>
+      <div class="num">Bloque 07</div>
+      <h2>Tráfico Inteligente y Sistemas Multiagente</h2>
+      <p>SUMO · Semáforos adaptativos · V2X · Multi-agent RL</p>
+    </a>
+
+    <a class="card" href="bloque-08/">
+      <div class="card-dot"></div>
+      <span class="card-icon">🚗</span>
+      <div class="badge">Disponible</div>
+      <div class="num">Bloque 08</div>
+      <h2>Integración Integral con CARLA</h2>
+      <p>Simulación autónoma · Sensor fusion · ROS2 · Pipeline completo</p>
+    </a>
+
+  </div>
+
+  <div class="road-wrap">
+    <div class="road-line"></div>
+    <div class="ev-trail"></div>
+    <div class="ev-car">🚗</div>
+  </div>
+
+  <footer>UTCJ · Ciudad Juárez, Chihuahua · 2025 · IA Aplicada a la Electromovilidad</footer>
+
+</div>
+
+<script>
+  /* ── Particle network background ── */
+  const canvas = document.getElementById('bg-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, particles;
+
+  const ACCENT = '0,212,255';
+  const COUNT = 55;
+  const MAX_DIST = 140;
+
+  function resize() {
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+
+  function mkParticle() {
+    return {
+      x: Math.random() * W,
+      y: Math.random() * H,
+      vx: (Math.random() - 0.5) * 0.35,
+      vy: (Math.random() - 0.5) * 0.35,
+      r: Math.random() * 1.8 + 0.8,
+    };
+  }
+
+  function initParticles() {
+    particles = Array.from({ length: COUNT }, mkParticle);
+  }
+
+  function drawFrame() {
+    ctx.clearRect(0, 0, W, H);
+
+    // Move & bounce
+    for (const p of particles) {
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0 || p.x > W) p.vx *= -1;
+      if (p.y < 0 || p.y > H) p.vy *= -1;
+    }
+
+    // Connections
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < MAX_DIST) {
+          const alpha = (1 - dist / MAX_DIST) * 0.25;
+          ctx.beginPath();
+          ctx.strokeStyle = `rgba(${ACCENT},${alpha})`;
+          ctx.lineWidth = 0.6;
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.stroke();
+        }
+      }
+    }
+
+    // Dots
+    for (const p of particles) {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${ACCENT},0.55)`;
+      ctx.fill();
+    }
+
+    requestAnimationFrame(drawFrame);
+  }
+
+  window.addEventListener('resize', () => { resize(); initParticles(); });
+  resize();
+  initParticles();
+  drawFrame();
+
+  /* ── Counter animation ── */
+  function animateCounter(el, target, duration = 1600) {
+    const start = performance.now();
+    const tick = (now) => {
+      const progress = Math.min((now - start) / duration, 1);
+      const ease = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.round(ease * target);
+      if (progress < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        document.querySelectorAll('[data-target]').forEach(el => {
+          animateCounter(el, parseInt(el.dataset.target));
+        });
+        // Battery fill
+        setTimeout(() => { document.getElementById('batt').style.width = '100%'; }, 200);
+        observer.disconnect();
+      }
+    });
+  }, { threshold: 0.1 });
+
+  observer.observe(document.querySelector('.stats'));
+
+  /* ── Card mouse-follow glow ── */
+  document.querySelectorAll('.card').forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width * 100).toFixed(1);
+      const y = ((e.clientY - rect.top) / rect.height * 100).toFixed(1);
+      card.style.background = `radial-gradient(circle at ${x}% ${y}%, #1B4F72cc, #0D1B2A 70%)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.background = '';
+    });
+  });
+</script>
 </body>
 </html>
